@@ -16,6 +16,7 @@ export default function Home() {
   },[isOpen, onOpen])
   
   return (
+    /// return Null. we only want it ot intial the modal
     <div>
         This is a protected route!
         <UserButton />
