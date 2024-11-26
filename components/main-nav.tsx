@@ -20,6 +20,12 @@ export function MainNav({
 
         },
         {
+            href: `/${params.storeid}/billboards`,
+            label: 'Billboards',
+            active: pathname === `/${params.storeid}/billboards`
+
+        },
+        {
             href: `/${params.storeid}/settings`,
             label: 'Settings',
             active: pathname === `/${params.storeid}/settings`
