@@ -23,6 +23,7 @@ export default function StoreSwitcher({
 }:StoreSwitcherProps ){
     const StoreModal = useStoreModal();
     const params = useParams();
+ 
     const router = useRouter();
 
     const formatedItems = items.map((item)=>({
