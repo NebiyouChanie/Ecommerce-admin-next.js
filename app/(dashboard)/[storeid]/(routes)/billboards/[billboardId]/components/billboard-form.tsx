@@ -22,7 +22,7 @@ import ImageUload from "@/components/ui/image-upload";
 //Used with zodResolver for validating form inputs.  used for defining the type
 const formSchema = z.object({
     label: z.string().min(1),
-    imageUrl: z.string().min(1),
+    imageUrl: z.string().min(1,"Please upload image."),
 });
 
 //Ensures form data adheres to the schema structure.
@@ -82,7 +82,6 @@ const BillboardsForm: React.FC<BillboardsFormsProps> = (
             setloading(true)
             const response = await axios.delete(`/api/${params.storeid}/billboards/${params.billboardId}`)
             router.refresh();
-            router.push('/')
             toast.success("Billboard Deleted successfully")
             router.push(`/${params.storeid}/billboards`)
         } catch (error) {
