@@ -5,25 +5,25 @@ import { NextResponse } from "next/server"
 
 export async function GET(
     req:Request,
-    { params }: { params: { sizeId: string }}
+    { params }: { params: { colorId: string }}
 ) {
     try {
 
-        if(!params.sizeId) {
-            return new NextResponse("Size Id is required",{status: 400})
+        if(!params.colorId) {
+            return new NextResponse("Color Id is required",{status: 400})
         }
 
-        const size = await prismadb.size.findUnique({
+        const color = await prismadb.color.findUnique({
             where: {
-                id:params.sizeId,
+                id:params.colorId,
             },
              
         });
 
-        return NextResponse.json(size)
+        return NextResponse.json(color)
         
     } catch (error) {
-        console.log("Size GET ~ file: route.ts:8 ~ error:dlete", error)
+        console.log("Color GET ~ file: route.ts:8 ~ error:dlete", error)
         return new NextResponse("Internal error", {status: 500});
     }
 }
@@ -31,7 +31,7 @@ export async function GET(
 
 export async function PATCH(
     req:Request,
-    { params }: { params: { storeid: string,  sizeId: string }}
+    { params }: { params: { storeid: string,  colorId: string }}
 ) {
     try {
         const {userId} = await auth()
@@ -50,8 +50,8 @@ export async function PATCH(
             return new NextResponse("Value is required",{status: 400})
         }
 
-        if(!params.sizeId) {
-            return new NextResponse("Size Id is required",{status: 400})
+        if(!params.colorId) {
+            return new NextResponse("Color Id is required",{status: 400})
         }
 
         const storeByUserId = await prismadb.store.findFirst({
@@ -65,9 +65,9 @@ export async function PATCH(
             return new NextResponse("Unauthorized",{status: 403})
         }
 
-        const size = await prismadb.size.updateMany({
+        const color = await prismadb.color.updateMany({
             where: {       
-                id: params.sizeId,
+                id: params.colorId,
             },
             data: {
                 name,
@@ -76,11 +76,11 @@ export async function PATCH(
         });
 
 
-        return NextResponse.json(size)
+        return NextResponse.json(color)
 
         
     } catch (error) {
-        console.log("Size patch ~ file: route.ts:8 ~ error:", error)
+        console.log("Color patch ~ file: route.ts:8 ~ error:", error)
         return new NextResponse("Internal error", {status: 500});
     }
 }
@@ -89,7 +89,7 @@ export async function PATCH(
 
 export async function DELETE(
     req:Request,
-    { params }: { params: { storeid: string,  sizeId: string }}
+    { params }: { params: { storeid: string,  colorId: string }}
 ) {
     try {
         const {userId} = await auth()
@@ -98,8 +98,8 @@ export async function DELETE(
             return new NextResponse("unauthnenticated",{status: 401})
         }
 
-        if(!params.sizeId) {
-            return new NextResponse("Size Id is required",{status: 400})
+        if(!params.colorId) {
+            return new NextResponse("Color Id is required",{status: 400})
         }
 
         const storeByUserId = await prismadb.store.findFirst({
@@ -113,18 +113,18 @@ export async function DELETE(
             return new NextResponse("Unauthorized",{status: 403})
         }
 
-        const size = await prismadb.size.deleteMany({
+        const color = await prismadb.color.deleteMany({
             where: {
-                id:params.sizeId,
+                id:params.colorId,
             },
              
         });
 
-        return NextResponse.json(size)
+        return NextResponse.json(color)
 
         
     } catch (error) {
-        console.log("Size Delete ~ file: route.ts:8 ~ error:dlete", error)
+        console.log("Color Delete ~ file: route.ts:8 ~ error:dlete", error)
         return new NextResponse("Internal error", {status: 500});
     }
 }
